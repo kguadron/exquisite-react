@@ -21,6 +21,18 @@ class PlayerSubmissionForm extends Component {
     const submission = this.state
     // submission.playerNumber += 1
     this.props.addSubmissionCallback(submission)
+    this.clearForm()
+  }
+
+  clearForm = () => {
+    const updatedState = this.state
+    updatedState.adjective = ""
+    updatedState.noun = ""
+    updatedState.adverb = ""
+    updatedState.verb = ""
+    updatedState.adjectiveTwo = ""
+    updatedState.nounTwo = ""
+    this.setState(updatedState);
   }
 
   onInputChange = (event) => {
