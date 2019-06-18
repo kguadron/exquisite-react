@@ -8,6 +8,27 @@ class Game extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      allSubmissions: [],
+      mostRecentSubmission: ""
+    }
+  }
+
+  constructSubmissionSentence = (words) => {
+    const sentence = 'The ' + words.adjective + ' ' + words.noun + ' ' 
+                      + words.adverb + ' the ' + words.verb + ' '
+                      + words.adjectiveTwo + ' ' + words.nounTwo + '.'
+    return sentence
+  }
+
+  addSubmission = (submission) => {
+    const newState = this.state;
+    newState.mostRecentSubmission = this.constructSubmissionSentence(submission);
+    newState.allSubmissions.push(newState.mostRecentSubmission)
+    this.setState({newState})
+    console.log(this.state.allSubmissions)
+    console.log(this.state.mostRecentSubmission)
   }
 
   render() {
@@ -40,7 +61,7 @@ class Game extends Component {
 
         <RecentSubmission />
 
-        <PlayerSubmissionForm />
+        <PlayerSubmissionForm addSubmissionCallback={this.addSubmission}/>
 
         <FinalPoem />
 
