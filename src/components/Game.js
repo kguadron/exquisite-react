@@ -11,7 +11,8 @@ class Game extends Component {
 
     this.state = {
       allSubmissions: [],
-      mostRecentSubmission: ""
+      mostRecentSubmission: "",
+      playerNumber: 1
     }
   }
 
@@ -25,7 +26,8 @@ class Game extends Component {
   addSubmission = (submission) => {
     const newState = this.state;
     newState.mostRecentSubmission = this.constructSubmissionSentence(submission);
-    newState.allSubmissions.push(newState.mostRecentSubmission)
+    newState.allSubmissions.push(newState.mostRecentSubmission);
+    newState.playerNumber += 1;
     this.setState({newState})
     console.log(this.state.allSubmissions)
     console.log(this.state.mostRecentSubmission)
@@ -61,7 +63,10 @@ class Game extends Component {
 
         <RecentSubmission />
 
-        <PlayerSubmissionForm addSubmissionCallback={this.addSubmission}/>
+        <PlayerSubmissionForm 
+        addSubmissionCallback={this.addSubmission}
+        playerNumber={this.state.playerNumber}
+        />
 
         <FinalPoem />
 

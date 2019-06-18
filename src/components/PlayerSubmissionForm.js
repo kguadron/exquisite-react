@@ -12,14 +12,13 @@ class PlayerSubmissionForm extends Component {
       verb: "",
       adjectiveTwo: "",
       nounTwo: "",
-      // playerNumber: 1
     };
   }
 
   addSubmission = (event) => {
     event.preventDefault();
     const submission = this.state
-    // submission.playerNumber += 1
+
     this.props.addSubmissionCallback(submission)
     this.clearForm()
   }
@@ -48,7 +47,7 @@ class PlayerSubmissionForm extends Component {
 
     return (
       <div className="PlayerSubmissionForm">
-        <h3>Player Submission Form for Player #{ this.state.playerNumber }</h3>
+        <h3>Player Submission Form for Player #{ this.props.playerNumber }</h3>
 
         <form className="PlayerSubmissionForm__form" onSubmit={this.addSubmission}>
 
