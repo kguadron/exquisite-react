@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './PlayerSubmissionForm.css';
-
 class PlayerSubmissionForm extends Component {
 
   constructor(props) {
@@ -43,6 +42,10 @@ class PlayerSubmissionForm extends Component {
     this.setState(updatedState);
   }
 
+  isValidInput = (value) => {
+    return value.length
+  }
+
   render() {
 
     return (
@@ -55,6 +58,7 @@ class PlayerSubmissionForm extends Component {
             <p> The </p>
             <input
               name="adjective"
+              className={this.isValidInput(this.state.adjective) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="adjective"
               type="text" 
               value={this.state.adjective}
@@ -62,6 +66,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="noun"
+              className={this.isValidInput(this.state.noun) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="noun"
               type="text" 
               value={this.state.noun}
@@ -69,6 +74,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="adverb"
+              className={this.isValidInput(this.state.adverb) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="adverb"
               type="text" 
               value={this.state.adverb}
@@ -76,6 +82,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="verb"
+              className={this.isValidInput(this.state.verb) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="verb"
               type="text" 
               value={this.state.verb}
@@ -84,6 +91,7 @@ class PlayerSubmissionForm extends Component {
             <p> the </p>
             <input
               name="adjectiveTwo"
+              className={this.isValidInput(this.state.adjectiveTwo) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="adjective"
               type="text" 
               value={this.state.adjectiveTwo}
@@ -91,6 +99,7 @@ class PlayerSubmissionForm extends Component {
             />
             <input
               name="nounTwo"
+              className={this.isValidInput(this.state.nounTwo) > 0 ? "PlayerSubmissionForm__input" : "PlayerSubmissionForm__input--invalid"}
               placeholder="noun"
               type="text" 
               value={this.state.nounTwo}

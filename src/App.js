@@ -18,7 +18,7 @@ class App extends Component {
             adjective noun." as in "The green duck sweetly 
             sang the dreadful dirge.") or by being allowed to 
             see only the end of what the previous person 
-            ontributed.
+            contributed.
           </p>
         </header>
         <Game />

@@ -12,23 +12,14 @@ class Game extends Component {
     this.state = {
       allSubmissions: [],
       mostRecentSubmission: "",
-      playerNumber: 1
+      playerNumber: 1,
+      showFinalPoem: false
     }
-  }
-
-  constructFinalPoem = () => {
-    const submissions = this.state.allSubmissions
-
-    let poem = ""
-    for (let i = 0; i < submissions.length; i+=1) {
-      poem += submissions[i]
-    }
-    return poem
   }
 
   constructSubmissionSentence = (words) => {
     const sentence = 'The ' + words.adjective + ' ' + words.noun + ' ' 
-                      + words.adverb + ' the ' + words.verb + ' '
+                      + words.adverb + ' ' + words.verb + ' the '
                       + words.adjectiveTwo + ' ' + words.nounTwo + '.'
     return sentence
   }
@@ -39,8 +30,59 @@ class Game extends Component {
     newState.allSubmissions.push(newState.mostRecentSubmission);
     newState.playerNumber += 1;
     this.setState({newState})
-    console.log(this.state.allSubmissions)
-    console.log(this.state.mostRecentSubmission)
+  }
+
+  onButtonClick = () => {
+    const newState = this.state;
+    newState.showFinalPoem = true;
+
+    this.setState({showFinalPoem: newState.showFinalPoem})
+  }
+
+  constructComponentRendering(showFinalPoem, playerNumber) {
+    if (showFinalPoem) {
+      return (
+        <FinalPoem 
+          allSubmissions={this.state.allSubmissions}
+          onButtonClick={this.onButtonClick}
+          showFinalPoem={this.state.showFinalPoem}
+        />
+      );
+    } else if (!showFinalPoem && playerNumber === 1) {
+        return (
+          <div>
+            <PlayerSubmissionForm 
+            addSubmissionCallback={this.addSubmission}
+            playerNumber={this.state.playerNumber}
+            />
+
+            <FinalPoem 
+            allSubmissions={this.state.allSubmissions}
+            onButtonClick={this.onButtonClick}
+            showFinalPoem={this.state.showFinalPoem}
+            />
+          </div>
+        );
+    } else {
+      return (
+        <div>
+          <RecentSubmission 
+          mostRecentSubmission={this.state.mostRecentSubmission}
+          />
+
+          <PlayerSubmissionForm 
+          addSubmissionCallback={this.addSubmission}
+          playerNumber={this.state.playerNumber}
+          />
+
+          <FinalPoem 
+          allSubmissions={this.state.allSubmissions}
+          onButtonClick={this.onButtonClick}
+          showFinalPoem={this.state.showFinalPoem}
+          />
+        </div>
+      );
+    }
   }
 
   render() {
@@ -71,19 +113,7 @@ class Game extends Component {
           { exampleFormat }
         </p>
 
-        <RecentSubmission 
-        mostRecentSubmission={this.state.mostRecentSubmission}
-        />
-
-        <PlayerSubmissionForm 
-        addSubmissionCallback={this.addSubmission}
-        playerNumber={this.state.playerNumber}
-        />
-
-        <FinalPoem 
-        // constructFinalPoem={this.constructFinalPoem}
-        allSubmissions={this.state.allSubmissions}
-        />
+        {this.constructComponentRendering(this.state.showFinalPoem, this.state.playerNumber)}
 
       </div>
     );
