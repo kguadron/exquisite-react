@@ -16,6 +16,16 @@ class Game extends Component {
     }
   }
 
+  constructFinalPoem = () => {
+    const submissions = this.state.allSubmissions
+
+    let poem = ""
+    for (let i = 0; i < submissions.length; i+=1) {
+      poem += submissions[i]
+    }
+    return poem
+  }
+
   constructSubmissionSentence = (words) => {
     const sentence = 'The ' + words.adjective + ' ' + words.noun + ' ' 
                       + words.adverb + ' the ' + words.verb + ' '
@@ -70,7 +80,10 @@ class Game extends Component {
         playerNumber={this.state.playerNumber}
         />
 
-        <FinalPoem />
+        <FinalPoem 
+        // constructFinalPoem={this.constructFinalPoem}
+        allSubmissions={this.state.allSubmissions}
+        />
 
       </div>
     );
